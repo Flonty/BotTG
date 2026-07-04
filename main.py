@@ -2,6 +2,7 @@ import asyncio
 import logging
 import sys
 import os
+import random
 from aiogram import Bot, Dispatcher, html, F
 from aiogram.client.default import DefaultBotProperties
 from aiogram.enums import ParseMode
@@ -9,7 +10,7 @@ from aiogram.filters import CommandStart, Command
 from aiogram.types import Message, FSInputFile
 from dotenv import load_dotenv
 
-from keyboard import main_keyboard, menu_keyboard, game_keyboard
+from keyboard import main_keyboard, menu_keyboard, game_keyboard, syefa
 
 load_dotenv()
 TOKEN = os.getenv("BOT_TOKEN")
@@ -52,6 +53,21 @@ async def message_hello(message:Message):
 @dp.message(F.text=="О игре")
 async def message_hello(message:Message):
     await message.answer("Очень крутые игры")
+@dp.message(F.text == "Суефа")
+async def message_hello(message: Message):
+    await message.answer("Сделайте выбор", reply_markup=syefa)
+@dp.message(F.text.in_({"Камень", "Ножницы", "Бумага"}))
+async def syefa_game_handler(message: Message):
+    user_choice = message.text
+    bot_choice = random.choice(["Камень", "Ножницы", "Бумага"])
+    if user_choice == bot_choice:
+        result = "Ничья"
+    elif (user_choice == "Камень" and bot_choice == "Ножницы") or (user_choice == "Ножницы" and bot_choice == "Бумага") or (user_choice == "Бумага" and bot_choice == "Камень"):
+        result = "Вы победили"
+    else:
+        result = "Бот победил"
+    await message.answer(f"Я выбрал {bot_choice}\n"
+                         f"{result}")
 @dp.message()
 async def echo_handler(message: Message):
     try:

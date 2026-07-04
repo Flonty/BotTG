@@ -23,6 +23,9 @@ menu_keyboard=ReplyKeyboardMarkup(
         [
             KeyboardButton(text="Профиль"),
             KeyboardButton(text="О нас")
+        ],
+        [
+            KeyboardButton(text="Меню"),
         ]
     ],
     resize_keyboard=True
@@ -37,6 +40,23 @@ game_keyboard=ReplyKeyboardMarkup(
         [
             KeyboardButton(text="кс2"),
             KeyboardButton(text="не кс2")
+        ],
+        [
+            KeyboardButton(text="Меню"),
+        ]
+    ],
+    resize_keyboard=True
+)
+
+syefa=ReplyKeyboardMarkup(
+    keyboard=[
+        [
+            KeyboardButton(text="Камень"),
+            KeyboardButton(text="Ножницы"),
+            KeyboardButton(text="Бумага")
+        ],
+        [
+            KeyboardButton(text="Меню"),
         ]
     ],
     resize_keyboard=True
